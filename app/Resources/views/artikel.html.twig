@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<h1>Artikel overzicht</h1>
+	<ol>
+	{% for artikel in artikelen %}
+		<li style="color:black">
+		 {{ artikel.id }}, {{artikel.naam}}
+		 <a href="{{ path ('artikelwijzigen',{'id':artikel.id}) }}">Wijzig</a>
+		 <a href="{{ path ('artikelverwijderen',{'id':artikel.id}) }}">Verwijder</a>
+		 </a>
+		</li>
+	{% endfor %}
+	<ol>
+{% endblock %}

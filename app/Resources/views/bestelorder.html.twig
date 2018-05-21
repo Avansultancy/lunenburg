@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<h1>Bestelorder overzicht</h1>
+	<style>
+	table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+	th, td {
+    padding: 5px;
+    text-align: left;    
+}
+</style>
+     <table style="width:90%">
+        <thead>
+            <tr>
+                <th>Bestelnummer</th>
+                <th>Aantal</th>
+                <th>Leverancier</th>
+                <th>Artikel</th>
+                <th>Handelingen</th>
+            </tr>
+        </thead>
+        <tbody>
+        	{% for bestelorder in bestelorders %}
+        	<tr>
+			<td>{{bestelorder.id}}</td>
+			<td>{{bestelorder.aantal}}</td>
+
+
+  				{% for leverancier in leverancieren %}
+				{%if bestelorder.idleverancier == leverancier.id%}
+					 <td>{{leverancier.naam}}</td> 
+
+				{% for artikel in artikelen %}
+					{%if bestelorder.idArtikel == artikel.id%}
+						<td>{{artikel.naam}}</td>
+
+					<td>
+					<ul>
+						<li>
+					 	<a href="{{ path ('bestelorderwijzigen',{'id':bestelorder.id}) }}">Wijzig</a>
+					 	</li>
+					 	<!--<li>
+				 		<a href="{{ path ('artikelverwijderen',{'id':bestelorder.id}) }}">Verwijder</a>
+				 		</li>-->
+				 	</ul>	
+				 	</td>
+							{%endif%}
+						{% endfor %}
+					{% endif %}
+
+				{% endfor %}
+				</tr>
+			{% endfor %}
+	
+        </tbody>
+    </table>		
+{% endblock %}

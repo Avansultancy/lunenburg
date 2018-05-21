@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Goederen lijst</h1>
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+    th, td {
+    padding: 5px;
+    text-align: left;    
+}
+</style>
+    <table style="width:90%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Hoeveelheid</th>
+                <th>Kwaliteit</th>
+                <th>Beschrijving</th>
+                <th>Artikel</th>
+                <th>Leverancier</th>
+                <th>Ontvangstdatum</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for goederen in goederens %}
+
+             {% for artikel in artikelen %}
+             {%if goederen.idArtikel == artikel.id%}        
+                
+                {% for leverancier in leveranciers %}
+                {%if goederen.leverancierId == leverancier.id%}  
+                    {% for status in statussen %}
+                    {%if goederen.status == status.id%}  
+                <tr>
+                <td>{{ goederen.id }}</a></td>
+                <td>{{ goederen.hoeveelheid }}</td>
+                <td>{{ goederen.kwaliteit }}</td>
+                <td>{{ goederen.beschrijving }}</td>
+                <td>{{ artikel.naam }}</td>
+                <td>{{ leverancier.naam }}</td>
+                <td>{{ goederen.ontvangstdatum|date("m/d/Y") }}</td>
+                <td>{{ status.naam }}</td>
+                </tr>
+                     {%endif%}
+                    {% endfor %}
+                {%endif%}
+                {% endfor %}
+            {%endif%}
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

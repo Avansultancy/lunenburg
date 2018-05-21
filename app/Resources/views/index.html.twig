@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Artikel lijst</h1>
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+    th, td {
+    padding: 5px;
+    text-align: left;    
+}
+</style>
+    <table style="width:90%">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Omschrijving</th>
+                <th>Technischespecificaties</th>
+                <th>Inkoopprijs</th>
+                <th>Minimalevoorraad</th>
+                <th>Aantalvoorraad</th>
+                <th>Bestelserie</th>
+                <th>Id</th>
+                <th>Handelingen</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for artikel in artikelen %}
+            <tr>
+                <td><a href="{{ path('artikelbekijken', { 'id': artikel.id }) }}">{{ artikel.naam }}</a></td>
+                <td>{{ artikel.omschrijving }}</td>
+                <td>{{ artikel.technischeSpecificatie }}</td>
+                <td>{{ artikel.inkoopprijs }}</td>
+                <td>{{ artikel.minimaleVoorraad }}</td>
+                <td>{{ artikel.aantalVoorraad }}</td>
+                <td>{{ artikel.bestelserie }}</td>
+                <td>{{ artikel.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('artikelbekijken', { 'id': artikel.id }) }}">Bekijken</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('artikelwijzigen', { 'id': artikel.id }) }}">Aanpassen</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('nieuweartikel') }}">Maak een nieuw artikel aan</a>
+        </li>
+    </ul>
+{% endblock %}

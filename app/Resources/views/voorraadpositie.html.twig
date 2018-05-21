@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Voorraadpositie overzicht</h1>
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+    th, td {
+    padding: 5px;
+    text-align: left;    
+}
+</style>
+     <table style="width:90%">
+        <thead>
+            <tr>
+                <th>Artikel</th>
+                <th>Technische Voorraad</th>
+                <th>Gereserveerde Voorraad</th>
+                <th>Vrije Voorraad</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for technischv in technischevoorraad %}
+            <tr>
+                {% for gereserveerdv in gereserveerdevoorraad %}
+                
+                {%if technischv.id == gereserveerdv.id%}
+                <td>{{technischv.naam}}</td>
+                <td>{{technischv.aantalVoorraad}}</td>
+                <td>{{gereserveerdv.aantal}}</td> 
+                <td>{{technischv.aantalVoorraad-gereserveerdv.aantal}}</td>
+
+                </br>
+
+                {%endif%}
+            {% endfor %}
+            </tr>
+        {% endfor %}  
+        </tbody>
+    </table>
+             
+{% endblock %}
